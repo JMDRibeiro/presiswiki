@@ -46,11 +46,20 @@ public class JerseyExemploController {
                               @QueryParam("partido") String partido){
         Presidenciavel p = new Presidenciavel(nome,partido);
         this.presidenciavelDAO.insert(p);
-        return this.presidenciavelDAO.size()+"";    
+        return new Gson().toJson(p);    
     }
     
     @GET
-    @Path("get/{id}")
+    @Path("delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String delete(@QueryParam("id") int id){
+        Presidenciavel p = new Presidenciavel(id);
+        this.presidenciavelDAO.delete(p);
+        return listAll();    
+    }
+    
+    @GET
+    @Path("get")
     @Produces(MediaType.APPLICATION_JSON)
     public String get(@QueryParam("id") int id){
         System.out.println("Id passado: "+id);
@@ -62,13 +71,13 @@ public class JerseyExemploController {
     }
     
     @GET
-    @Path("update/{id}")
+    @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
     public String update(@QueryParam("id") int id){
-        Presidenciavel p = new Presidenciavel(1);
+        Presidenciavel p = new Presidenciavel(id);
         p.nome = "Maria";
         this.presidenciavelDAO.update(p);
-        return "atualize" ;
+        return new Gson().toJson(p);
     }
  
     @GET

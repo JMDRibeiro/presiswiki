@@ -16,15 +16,26 @@ public class PresidenciavelDAO {
     static private ArrayList<Presidenciavel> presidenciaveis;
     
     public PresidenciavelDAO(){
+        id = 1;
         this.presidenciaveis = new ArrayList<Presidenciavel>();
         Presidenciavel p1 = new Presidenciavel("João","PSB","Estado eficiente, Brasil melhor pra gente","Governador",25);
-        this.presidenciaveis.add(p1);
+        insert(p1);
+        Presidenciavel p2 = new Presidenciavel("ACM Neto","DEM","Menos Estado, mais Brasil","Governador",19.5);
+        insert(p2);
+        Presidenciavel p3 = new Presidenciavel("Lula","PT","Brasil, um país de todos","Presidente",25);
+        insert(p3);
     }
     
     public boolean insert(Presidenciavel presidenciavel){
         presidenciavel.id = id;
         id++;
        return  this.presidenciaveis.add(presidenciavel);
+    }
+    
+    public boolean delete(Presidenciavel presidenciavel){
+        int index = presidenciavel.id - 1;
+        this.presidenciaveis.remove(index);
+        return true;
     }
     
     public boolean update(Presidenciavel presidenciavel){
