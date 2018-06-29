@@ -12,7 +12,6 @@ package com.mycompany.avaliacao;
 public class Presidenciavel {
        String nome;
        String partido;
-       String bordao;
        String ultimoCargo;
        double percentualMedioPesquisas;
        int id;
@@ -26,10 +25,9 @@ public class Presidenciavel {
            this.partido = partido;
     }
     
-    Presidenciavel(String nome, String partido,String bordao,String ultimoCargo,double percentualMedioPesquisas) {
+    Presidenciavel(String nome, String partido,String ultimoCargo,double percentualMedioPesquisas) {
            this.nome = nome;
            this.partido = partido;
-           this.bordao = bordao;
            this.ultimoCargo= ultimoCargo;
            this.percentualMedioPesquisas = percentualMedioPesquisas;
     }

@@ -24,8 +24,6 @@ import javax.ws.rs.core.Response.Status;
  */
 @Path("presiswiki")
 public class JerseyExemploController {
-
-    PresidenciavelDAO presidenciavelDAO = new PresidenciavelDAO();
     /**
      * Method handling HTTP GET requests. The returned object will be sent
      * to the client as "text/plain" media type.
@@ -38,14 +36,14 @@ public class JerseyExemploController {
         return "Seja bem-vindo ao PresisWiki, um sistema com informações"
                 + " gerais sobre os presidenciáveis!";
     }
-    
+
     @GET
     @Path("insert")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String insert(@QueryParam("nome") String nome, 
-                              @QueryParam("partido") String partido){
-        Presidenciavel p = new Presidenciavel(nome,partido);
-        this.presidenciavelDAO.insert(p);
+    @Produces(MediaType.APPLICATION_JSON)
+    public String insert(@QueryParam("nome") String nome,@QueryParam("partido") String partido,
+                         @QueryParam("ultimoCargo") String ultimoCargo,@QueryParam("percentualMedioPesquisas")double percentualMedioPesquisas){
+        Presidenciavel p = new Presidenciavel(nome,partido,ultimoCargo,percentualMedioPesquisas);
+        PresidenciavelDAO.getInstance().insert(p);
         return new Gson().toJson(p);    
     }
     
@@ -54,7 +52,7 @@ public class JerseyExemploController {
     @Produces(MediaType.TEXT_PLAIN)
     public String delete(@QueryParam("id") int id){
         Presidenciavel p = new Presidenciavel(id);
-        this.presidenciavelDAO.delete(p);
+        PresidenciavelDAO.getInstance().delete(p);
         return listAll();    
     }
     
@@ -62,21 +60,17 @@ public class JerseyExemploController {
     @Path("get")
     @Produces(MediaType.APPLICATION_JSON)
     public String get(@QueryParam("id") int id){
-        System.out.println("Id passado: "+id);
         Presidenciavel p = new Presidenciavel(id);
-        System.out.println("Id presidenciavel: "+p.id);
-        p = this.presidenciavelDAO.get(p);
-        System.out.println("Nome "+p.nome);
+        PresidenciavelDAO.getInstance().get(p);
         return new Gson().toJson(p);
     }
     
     @GET
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
-    public String update(@QueryParam("id") int id){
+    public String update(@QueryParam("id") int id, @QueryParam("novoPercentualPesquisa") double novoPercentualPesquisa){
         Presidenciavel p = new Presidenciavel(id);
-        p.nome = "Maria";
-        this.presidenciavelDAO.update(p);
+        PresidenciavelDAO.getInstance().update(p,novoPercentualPesquisa);
         return new Gson().toJson(p);
     }
  
@@ -84,7 +78,7 @@ public class JerseyExemploController {
     @Path("listAll")
     @Produces(MediaType.APPLICATION_JSON)
     public String listAll(){
-        return new Gson().toJson(presidenciavelDAO.listAll());
+        return new Gson().toJson(PresidenciavelDAO.getInstance().listAll());
     }
 }
 
