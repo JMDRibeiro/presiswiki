@@ -45,13 +45,10 @@ public class PresidenciavelDAO {
         return true;
     }
     
-    public boolean update(Presidenciavel presidenciavel){
-        for(int i=0;i<this.presidenciaveis.size();i++){
-            if(this.presidenciaveis.get(i).id==presidenciavel.id)
-                this.presidenciaveis.set(i,presidenciavel);
-                return true;
-        }
-        return false;
+    public Presidenciavel update(Presidenciavel presidenciavel){
+        int index = findIndex(presidenciavel);
+        presidenciaveis.set(index,presidenciavel);
+        return get(presidenciavel);
     }
     
     public Presidenciavel update(Presidenciavel presidenciavel,double percentualMedio){

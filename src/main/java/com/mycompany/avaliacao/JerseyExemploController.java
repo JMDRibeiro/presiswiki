@@ -41,11 +41,14 @@ public class JerseyExemploController {
     @Path("insert")
     @Produces(MediaType.APPLICATION_JSON)
     public String insert(@QueryParam("nome") String nome,@QueryParam("partido") String partido,
-                         @QueryParam("ultimoCargo") String ultimoCargo,@QueryParam("percentualMedioPesquisas")double percentualMedioPesquisas){
+                         @QueryParam("ultimoCargo") String ultimoCargo,
+                         @QueryParam("percentualMedioPesquisas")double percentualMedioPesquisas){
         Presidenciavel p = new Presidenciavel(nome,partido,ultimoCargo,percentualMedioPesquisas);
         PresidenciavelDAO.getInstance().insert(p);
         return new Gson().toJson(p);    
     }
+    //"João","PSD","Governador",25
+    
     
     @GET
     @Path("delete")
@@ -69,13 +72,22 @@ public class JerseyExemploController {
     @GET
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
-    public String update(@QueryParam("id") int id, @QueryParam("novoPercentualPesquisa") double novoPercentualPesquisa){
-        Presidenciavel p = new Presidenciavel(id);
-        p = PresidenciavelDAO.getInstance().update(p,novoPercentualPesquisa);
-        System.out.println("Update: "+p);
+    public String update(@QueryParam("id") int id,@QueryParam("nome") String nome,
+                         @QueryParam("partido") String partido,@QueryParam("ultimoCargo") String ultimoCargo,
+                         @QueryParam("percentualMedioPesquisas")double percentualMedioPesquisas){
+        Presidenciavel p = new Presidenciavel(id,nome,partido,ultimoCargo,percentualMedioPesquisas);
+        p = PresidenciavelDAO.getInstance().update(p);
         return new Gson().toJson(p);
     }
  
+    @GET
+    @Path("update")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String update(@QueryParam("id") int id,@QueryParam("percentualMedioPesquisas")double percentualMedioPesquisas){
+        Presidenciavel p = new Presidenciavel(id);
+        p = PresidenciavelDAO.getInstance().update(p,percentualMedioPesquisas);
+        return new Gson().toJson(p);
+    }
     @GET
     @Path("listAll")
     @Produces(MediaType.APPLICATION_JSON)

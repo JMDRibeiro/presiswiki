@@ -24,6 +24,13 @@ public class Presidenciavel {
            this.nome = nome;
            this.partido = partido;
     }
+    Presidenciavel(int id,String nome, String partido,String ultimoCargo,double percentualMedioPesquisas) {
+           this.id = id;
+           this.nome = nome;
+           this.partido = partido;
+           this.ultimoCargo= ultimoCargo;
+           this.percentualMedioPesquisas = percentualMedioPesquisas;
+    }
     
     Presidenciavel(String nome, String partido,String ultimoCargo,double percentualMedioPesquisas) {
            this.nome = nome;
