@@ -54,9 +54,9 @@ public class PresidenciavelDAO {
         return false;
     }
     
-    public boolean update(Presidenciavel presidenciavel,double percentualMedio){
+    public Presidenciavel update(Presidenciavel presidenciavel,double percentualMedio){
         get(presidenciavel).percentualMedioPesquisas = percentualMedio;
-        return false;
+        return get(presidenciavel);
     }
     
     public Presidenciavel get(Presidenciavel presidenciavel){

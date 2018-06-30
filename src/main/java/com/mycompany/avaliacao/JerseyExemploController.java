@@ -71,7 +71,8 @@ public class JerseyExemploController {
     @Produces(MediaType.APPLICATION_JSON)
     public String update(@QueryParam("id") int id, @QueryParam("novoPercentualPesquisa") double novoPercentualPesquisa){
         Presidenciavel p = new Presidenciavel(id);
-        PresidenciavelDAO.getInstance().update(p,novoPercentualPesquisa);
+        p = PresidenciavelDAO.getInstance().update(p,novoPercentualPesquisa);
+        System.out.println("Update: "+p);
         return new Gson().toJson(p);
     }
  
