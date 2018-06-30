@@ -19,7 +19,7 @@ public class PresidenciavelDAO {
     private PresidenciavelDAO(){
         id = 1;
         this.presidenciaveis = new ArrayList<Presidenciavel>();
-        Presidenciavel p1 = new Presidenciavel("João","PSB","Governador",25);
+        Presidenciavel p1 = new Presidenciavel("João","PSD","Governador",25);
         insert(p1);
         Presidenciavel p2 = new Presidenciavel("ACM Neto","DEM","Governador",19.5);
         insert(p2);
@@ -40,7 +40,7 @@ public class PresidenciavelDAO {
     }
     
     public boolean delete(Presidenciavel presidenciavel){
-        int index = presidenciavel.id - 1;
+        int index = findIndex(presidenciavel);
         this.presidenciaveis.remove(index);
         return true;
     }
@@ -60,16 +60,26 @@ public class PresidenciavelDAO {
     }
     
     public Presidenciavel get(Presidenciavel presidenciavel){
-        presidenciavel = presidenciaveis.get(presidenciavel.id-1);
-        System.out.println("Changing the value:"+presidenciavel.toString());
-        return  presidenciaveis.get(presidenciavel.id-1);
+        presidenciavel = presidenciaveis.get(findIndex(presidenciavel));
+        return  presidenciaveis.get(findIndex(presidenciavel));
+    }
+    
+    public ArrayList<Presidenciavel> listAll(){
+        return this.presidenciaveis;
     }
     
     public int size(){
         return this.presidenciaveis.size();
     }
     
-    public ArrayList<Presidenciavel> listAll(){
-        return this.presidenciaveis;
+    public int findIndex(Presidenciavel presidenciavel){
+    int index = -1;
+    for(int i=0;i<presidenciaveis.size();i++){
+        if(presidenciaveis.get(i).id == presidenciavel.id){
+            index = i;
+        }
+    }
+    return index;
+    
     }
 }
