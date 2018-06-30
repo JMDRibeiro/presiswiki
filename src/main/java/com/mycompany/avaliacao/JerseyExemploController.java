@@ -61,7 +61,8 @@ public class JerseyExemploController {
     @Produces(MediaType.APPLICATION_JSON)
     public String get(@QueryParam("id") int id){
         Presidenciavel p = new Presidenciavel(id);
-        PresidenciavelDAO.getInstance().get(p);
+        p = PresidenciavelDAO.getInstance().get(p);
+        System.out.println("Later the get:"+p.toString());
         return new Gson().toJson(p);
     }
     

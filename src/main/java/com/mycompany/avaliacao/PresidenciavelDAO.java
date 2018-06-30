@@ -55,23 +55,14 @@ public class PresidenciavelDAO {
     }
     
     public boolean update(Presidenciavel presidenciavel,double percentualMedio){
-        presidenciavel.percentualMedioPesquisas = percentualMedio;
-        for(int i=0;i<this.presidenciaveis.size();i++){
-            if(this.presidenciaveis.get(i).id==presidenciavel.id)
-                this.presidenciaveis.set(i,presidenciavel);
-                return true;
-        }
+        get(presidenciavel).percentualMedioPesquisas = percentualMedio;
         return false;
     }
     
     public Presidenciavel get(Presidenciavel presidenciavel){
-        for(int i=0;i<this.presidenciaveis.size();i++){
-            if(this.presidenciaveis.get(i).id == presidenciavel.id){
-                presidenciavel = this.presidenciaveis.get(i);
-                return this.presidenciaveis.get(i);
-            }
-        }
-       return  presidenciavel;
+        presidenciavel = presidenciaveis.get(presidenciavel.id-1);
+        System.out.println("Changing the value:"+presidenciavel.toString());
+        return  presidenciaveis.get(presidenciavel.id-1);
     }
     
     public int size(){

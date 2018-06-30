@@ -35,4 +35,9 @@ public class Presidenciavel {
     Presidenciavel(int id) {
            this.id = id;
     }
+    
+    public String toString(){
+        return "= {nome:"+this.nome+",partido="+this.partido+",ultimoCargo="+this.ultimoCargo
+                +",percentualMedioPesquisas="+this.percentualMedioPesquisas+"}";        
+    }
 }
