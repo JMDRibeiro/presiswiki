@@ -42,8 +42,8 @@ public class JerseyExemploController {
     @Produces(MediaType.APPLICATION_JSON)
     public String insert(@QueryParam("nome") String nome,@QueryParam("partido") String partido,
                          @QueryParam("ultimoCargo") String ultimoCargo,
-                         @QueryParam("percentualMedioPesquisas")double percentualMedioPesquisas){
-        Presidenciavel p = new Presidenciavel(nome,partido,ultimoCargo,percentualMedioPesquisas);
+                         @QueryParam("percentualPesquisas")double percentualPesquisas){
+        Presidenciavel p = new Presidenciavel(nome,partido,ultimoCargo,percentualPesquisas);
         PresidenciavelDAO.getInstance().insert(p);
         return new Gson().toJson(p);    
     }
@@ -69,6 +69,7 @@ public class JerseyExemploController {
         return new Gson().toJson(p);
     }
     
+    /*
     @GET
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,10 +80,12 @@ public class JerseyExemploController {
         p = PresidenciavelDAO.getInstance().update(p);
         return new Gson().toJson(p);
     }
- 
+  
+    */
+   
     @GET
     @Path("update")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public String update(@QueryParam("id") int id,@QueryParam("percentualMedioPesquisas")double percentualMedioPesquisas){
         Presidenciavel p = new Presidenciavel(id);
         p = PresidenciavelDAO.getInstance().update(p,percentualMedioPesquisas);
